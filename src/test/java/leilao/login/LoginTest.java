@@ -37,8 +37,7 @@ public class LoginTest {
 
 	@Test
 	public void deveriaEfetuarLoginComDadosValidos() {
-		
-		
+
 		
 		browser.findElement(By.id("username")).sendKeys("fulano");
 		browser.findElement(By.id("password")).sendKeys("pass");
@@ -52,11 +51,7 @@ public class LoginTest {
 	
 	@Test
 	public void naoDeveriaLogarComDadosInvalidos() {
-		
-		
 
-		
-		
 		browser.findElement(By.id("username")).sendKeys("invalido");
 		browser.findElement(By.id("password")).sendKeys("123");
 		browser.findElement(By.id("login-form")).submit();
@@ -69,6 +64,17 @@ public class LoginTest {
 		
 		
 	}
+	
+	@Test
+	public void naoDeveriaAcessarPaginaRestritaSemEstarLogado() {
+		browser.navigate().to("http://localhost:8080/leiloes/2");
+		
+		Assert.assertTrue(browser.getCurrentUrl().contains(URL_LOGIN));
+		Assert.assertFalse(browser.getPageSource().contains("Dados do Leilão"));
+		
+	}
+	
+	
 	
 	
 }
